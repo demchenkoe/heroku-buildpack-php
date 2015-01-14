@@ -9,7 +9,6 @@ source "$basedir/../conf/buildpack.conf"
 source $basedir/common.sh
 
 mkdir -p $HOME/bin
-composer install
 
 if [ -n "$BUILDPACK_DEBUG" ]; then
     set -x
