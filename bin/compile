@@ -8,6 +8,8 @@ basedir="$( cd -P "$( dirname "$0" )" && pwd )"
 source "$basedir/../conf/buildpack.conf"
 source $basedir/common.sh
 
+RUN mkdir /root/bin
+
 if [ -n "$BUILDPACK_DEBUG" ]; then
     set -x
 fi
