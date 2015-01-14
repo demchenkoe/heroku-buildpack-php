@@ -36,12 +36,24 @@ location / {
 }
 
 
-location ~ \.php {
-    include fastcgi_params;
-    fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
-    fastcgi_pass php;
-    fastcgi_buffers 256 4k;
+#location ~ \.php {
+#    include fastcgi_params;
+#    fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+#    fastcgi_pass php;
+#    fastcgi_buffers 256 4k;
+#}
+
+location ~ ^(.+?\.php)(/.*)?$ {
+        try_files $1 = 404;
+
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$1;
+        fastcgi_param PATH_INFO $2;
+        fastcgi_param HTTPS on;
+        fastcgi_pass php;
+        # Or use unix-socket with 'fastcgi_pass unix:/var/run/php5-fpm.sock;'
 }
+
 
 # Optional: set long EXPIRES header on static assets
 location ~* ^.+\.(jpg|jpeg|gif|bmp|ico|png|css|js|swf)$ {
