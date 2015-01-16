@@ -3,6 +3,8 @@ root /app/<%= ENV['DOCUMENT_ROOT'] %>;
 
 client_max_body_size 10G; # set max upload size
 fastcgi_buffers 64 4K;
+fastcgi_param PHP_VALUE upload_max_filesize=10G;
+fastcgi_param PHP_VALUE post_max_size=10G;
 
 rewrite ^/caldav(.*)$ /remote.php/caldav$1 redirect;
 rewrite ^/carddav(.*)$ /remote.php/carddav$1 redirect;
